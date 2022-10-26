@@ -114,25 +114,137 @@ fetch('http://localhost:3000/api/products')
     }
   }
 }
-getItem();
-
-/*!
--Concernant la modification, recourir à l'événement de
-modification (addEventListener de type change) pour observer le
-changement de la quantité.
--la méthode Element.closest() permet de cibler le
-produit à supprimer (où dont vous souhaitez
-modifier la quantité) grâce à son identifiant et sa couleur
--!Attention à bien penser à modifier le DOM, mais aussi localStorage,
-sinon les modifications effectuées dans le panier ne seront pas
-conservées en cas de changement de page / de rafraîchissement de
-la page.
-*/
 
 //fonction pour quantité total et prix total des articles
-function totalItems() {}
+function totalItems() {
+  //Calcul de la quantité
+  let eltQuantity = document.getElementsByClassName('itemQuantity');
+  let totalQuantitySelect = 0;
 
+  for (let i = 0; i < eltQuantity.length; i++) {
+    totalQuantitySelect += eltQuantity[i].valueAsNumber;
+  }
+  let totalQuantityItems = document.getElementById('totalQuantity');
+  totalQuantityItems.textContent = totalQuantitySelect;
+  console.log(totalQuantitySelect);
+
+  //calcul du Prix
+  let totalPrice = 0;
+  for (let i = 0; i < eltQuantity.length; i++) {
+    totalPrice += eltQuantity[i].valueAsNumber * purchaseStorage[i].price;
+  }
+  let productTotalPrice = document.getElementById('totalPrice');
+  productTotalPrice.textContent = totalPrice;
+  console.log(totalPrice);
+}
+//fonction de modification de la quantité des produits avec addEventListener change
+function modifyQuantity() {
+  const modifQuantity = document.querySelectorAll('.itemQuantity');
+
+  for (let i = 0; i < modifQuantity.length; i++) {
+    modifQuantity[i].addEventListener('change', function (event) {
+      event.preventDefault();
+      purchaseStorage[i].quantity = event.target.value;
+      localStorage.setItem('produit', JSON.stringify(purchaseStorage));
+      totalItems();
+    });
+  }
+}
 //fonction pour delete un Item
-function removeItem() {}
+function deleteItem() {
+  const delItem = document.querySelectorAll('.deleteItem');
+  console.log(delItem);
+  for (let d = 0; d < delItem.length; d++) {
+    delItem[d].addEventListener('click', (e) => {
+      e.preventDefault();
+      //demande de confirmation de la suppression de l'article
+      if (
+        window.confirm(
+          `Êtes- vous sur de vouloir supprimer ${purchaseStorage[d].quantity} ${purchaseStorage[d].nom} de couleur ${purchaseStorage[d].color} ?`
+        )
+      ) {
+        let idDelItem = purchaseStorage[d].idProduit;
+        let colorDelItem = purchaseStorage[d].color;
 
-//function message d'erreur pour input  id="firstNameErrorMsg">
+        purchaseStorage = purchaseStorage.filter(
+          (element) =>
+            element.idProduit !== idDelItem || element.color !== colorDelItem
+        );
+        localStorage.setItem('produit', JSON.stringify(purchaseStorage));
+        location.reload();
+      }
+    });
+  }
+}
+
+/*************************************FORMULAIRE**********************************************/
+//function pour different element du formulaire
+function getForm() {
+  //regex
+  let nameRegex = new RegExp("^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$");
+  let emailRegex = new RegExp(
+    '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$'
+  );
+  let adressRegex = new RegExp(
+    '^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+'
+  );
+
+  //évenement sur le champs prénom et validation du format
+  let firstName = document.getElementById('firstName');
+  firstName.addEventListener('input', function () {
+    if (nameRegex.test(firstName.value) === false) {
+      document.getElementById('firstNameErrorMsg').textContent =
+        'Format du prénom incorrect';
+    } else {
+      document.getElementById('firstNameErrorMsg').textContent = '';
+    }
+  });
+
+  //évenement sur le champs nom et validation du format
+  let lastName = document.getElementById('lastName');
+  lastName.addEventListener('input', function () {
+    if (nameRegex.test(lastName.value) === false) {
+      document.getElementById('lastNameErrorMsg').textContent =
+        'Format du nom incorrect';
+    } else {
+      document.getElementById('lastNameErrorMsg').textContent = '';
+    }
+  });
+
+  //évenement sur le champs adresse et validation du format
+  let address = document.getElementById('address');
+  address.addEventListener('input', function () {
+    if (adressRegex.test(address.value) === false) {
+      document.getElementById('addressErrorMsg').textContent =
+        "Format du l'adresse incorrect";
+    } else {
+      document.getElementById('addressErrorMsg').textContent = '';
+    }
+  });
+
+  //évenement sur le champs ville et validation du format
+  let city = document.getElementById('city');
+  city.addEventListener('input', function () {
+    if (nameRegex.test(city.value) === false) {
+      document.getElementById('cityErrorMsg').textContent =
+        'Format de la ville incorrecte';
+    } else {
+      document.getElementById('cityErrorMsg').textContent = '';
+    }
+  });
+
+  //évenement sur le champs email et validation du format
+  let email = document.getElementById('email');
+  email.addEventListener('input', function () {
+    if (emailRegex.test(email.value) === false) {
+      document.getElementById('emailErrorMsg').textContent =
+        "Format de l'email incorrect";
+    } else {
+      document.getElementById('emailErrorMsg').textContent = '';
+    }
+  });
+}
+function OrderForm() {
+  let order = document.querySelector('#order');
+  console.log(order);
+}
