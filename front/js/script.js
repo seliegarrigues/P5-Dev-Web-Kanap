@@ -1,12 +1,13 @@
 //On pense à suppr. Les Console.Log!*/
 
-//une requête HTTP avec la méthode GET, afin de récupérer des données.
+//une requête HTTP avec la méthode GET, afin de récupérer des données.Appel de l'API
 fetch('http://localhost:3000/api/products')
   .then((response) => response.json())
   .then((data) => getProducts(data))
   .catch((error) => console.error(error));
   
   function addProducts(data) {
+    //Utilisez une boucle for  pour ajouter un par un jusqu'à atteindre 100 :
     for (let i = 0; i < data.length; i++) {
       const { _id, imageUrl, altTxt, name, description } = data[i];
       
@@ -21,7 +22,7 @@ fetch('http://localhost:3000/api/products')
       appendArticleToAnchor(anchor, article);
     }
   }
-  // append elements dans le lien
+  // append elements dans le lien modification du dom
   function appendElmtsArticle(article, image, h3, p) {
     article.appendChild(image);
     article.appendChild(h3);

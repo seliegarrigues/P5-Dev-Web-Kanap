@@ -4,9 +4,26 @@ let purchaseStorage = JSON.parse(localStorage.getItem('produit'));
 
 console.table(purchaseStorage);
 //Fonction pour la création de l'article ou l'affichage du panier vide.
-function getItem() {
+fetch('http://localhost:3000/api/products')
+  .then((res) => res.json())
+  .then((data) => {
+    if (purchaseStorage) {
+      for (p of purchaseStorage) {
+        const product = data.find((d) => d._id === p.idProduit);
+        if (product) {
+          p.price = product.price;
+        }
+      }
+    }
+    getItem();
+    totalItems();
+    modifyQuantity();
+    deleteItem();
+    getForm();
+  });
+  function getItem() {
   //Affichage si panier vide
-  if (purchaseStorage === null) {
+  if (purchaseStorage === null || purchaseStorage.length === 0) {
     let emptyStorage = document.createElement('article');
     document.querySelector('#cart__items').appendChild(emptyStorage);
     emptyStorage.textContent = 'Votre panier est vide';
@@ -76,15 +93,15 @@ function getItem() {
 
       //création de <input>
 
-      let itemQuantity = document.createElement('input');
-      divContentSettings.appendChild(itemQuantity);
-      itemQuantity.setAttribute('type', 'number');
-      itemQuantity.classList.add('itemQuantity');
-      itemQuantity.setAttribute('name', 'itemQuantity');
-      itemQuantity.setAttribute('min', 1);
-      itemQuantity.setAttribute('max', 100);
-      itemQuantity.setAttribute('value', 1); // explication sur input et sa value
-
+      let inputQuantity = document.createElement('input');
+      divContentSettings.appendChild(inputQuantity);
+      inputQuantity.setAttribute('type', 'number');
+      inputQuantity.classList.add('inputQuantity');
+      inputQuantity.setAttribute('name', 'inputQuantity');
+      inputQuantity.setAttribute('min', 1);
+      inputQuantity.setAttribute('max', 100);
+      inputQuantity.value = purchaseStorage[p].quantity; // A REVOIR
+      
       //création de la div cart__item__content__settings__delete
       let itemDelete = document.createElement('div');
       divContentSettings.appendChild(itemDelete);
