@@ -129,7 +129,7 @@ function onClick(article) {
           alertConfirmation();
         }
       } else {
-         //Sinon s'il n'y a rien dans le panier création array
+         // si il n'y a rien dans le panier création array
          purchaseStorage = [];
          //On push les informations du localStorage dans le array
          purchaseStorage.push(info);
