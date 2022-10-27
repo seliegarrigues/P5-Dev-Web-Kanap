@@ -3,8 +3,8 @@ const sectionItems = document.querySelector('#items');
 //une requête HTTP avec la méthode GET, afin de récupérer des données.Appel de l'API
 fetch('http://localhost:3000/api/products')
   .then((response) => response.json())
-  .then((data) => for (const getProducts of data){
-    console.log(getProducts);
+  .then((data) => { for (const getProducts of data){
+    console.log(getProducts)
 
   //création des article des produits
   let A = document.createElement('a');
@@ -12,7 +12,7 @@ fetch('http://localhost:3000/api/products')
       sectionItems.appendChild(A);
 
     let article = document.createElement('article');
-    article.appendChild(article);
+    A.appendChild(article);
 
     let image = document.createElement('img');
     image.setAttribute("src",getProducts.imageUrl);
@@ -28,5 +28,5 @@ fetch('http://localhost:3000/api/products')
     p.setAttribute("class","productDescription");
       p.innerText = getProducts.description;
       article.appendChild(p);
-      }
-  ).catch((error) => console.error(error));
+    }})
+  .catch((error) => console.error(error));
