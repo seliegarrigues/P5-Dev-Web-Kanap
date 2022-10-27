@@ -5,14 +5,11 @@ fetch('http://localhost:3000/api/products')
   .then((response) => response.json())
   .then((data) => for (const getProducts of data){
     console.log(getProducts);
-  .catch((error) => console.error(error));
 
   //création des article des produits
   let A = document.createElement('a');
       A.setAttribute("href", `./product.html?id=${getProducts._id}`);
       sectionItems.appendChild(A);
-    
-    
 
     let article = document.createElement('article');
     article.appendChild(article);
@@ -22,7 +19,6 @@ fetch('http://localhost:3000/api/products')
     image.setAttribute("alt", getProducts.altTxt);
     article.appendChild(image);
     
-
     let h3 = document.createElement('h3');
     h3.setAttribute("class","productName");
       h3.innerText = getProducts.name;
@@ -32,6 +28,5 @@ fetch('http://localhost:3000/api/products')
     p.setAttribute("class","productDescription");
       p.innerText = getProducts.description;
       article.appendChild(p);
-    }
-   })
-  
+      }
+  ).catch((error) => console.error(error));
