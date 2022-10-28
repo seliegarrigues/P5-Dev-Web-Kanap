@@ -18,7 +18,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
   .then((res) => {
     return getArticle(res);
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.error(error));
 // ??????????
 
 //Création article des produits
