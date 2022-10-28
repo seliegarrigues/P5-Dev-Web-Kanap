@@ -6,7 +6,7 @@ fetch('http://localhost:3000/api/products')
   .then((data) => { for (const getProducts of data){
     console.log(getProducts)
 
-  //création des article des produits
+  //création des articles des produits
   let A = document.createElement('a');
       A.setAttribute("href", `./product.html?id=${getProducts._id}`);
       sectionItems.appendChild(A);
