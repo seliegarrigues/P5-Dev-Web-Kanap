@@ -264,7 +264,7 @@ function orderForm() {
   orderButton.addEventListener('click', (e) => {
     e.preventDefault();
     //si local storage vide et /ou formulaire non remplis correctement après test ReGex
-    if (purchaseStorage === 0) {
+    if (!purchaseStorage) {
       alert(
         'Votre panier est vide, veuillez sélectionner un article pour passer une commande'
       );
