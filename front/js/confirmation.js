@@ -6,8 +6,8 @@ let orderId = urlParams.get('orderId');
 //insertion de l'orderId dans l'HTML
 let orderNumber = document.querySelector('#orderId');
 orderNumber.textContent = orderId;
-//ICI OU SUR CART.JS???
+
 //suppression du localStorage
-let removeStorage = window.localStorage;
-removeStorage.clear();
-D;
+//let removeStorage = window.localStorage;
+//removeStorage.clear();
+
