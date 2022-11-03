@@ -1,4 +1,4 @@
-//On pense à suppr. Les Console.Log!*/
+
 
 //On récupere l'id du produit en question dans l'url
 const queryString = window.location.search;
