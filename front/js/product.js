@@ -53,7 +53,7 @@ function getArticle(article) {
 }
 
 function onClick(article) {
-    //button d'ajout des produits et écouteurs d'événement au click
+    // écoute button d'ajout des produits et écouteurs d'événement au click
 
     const button = document.querySelector('#addToCart');
   button.addEventListener('click', (e) => {

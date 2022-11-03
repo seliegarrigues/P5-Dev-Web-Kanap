@@ -82,7 +82,7 @@ fetch('http://localhost:3000/api/products')
       let divContentDescriptionPrice = document.createElement('p');
       divContentDescription.appendChild(divContentDescriptionPrice);
       divContentDescriptionPrice.textContent =
-        purchaseStorage[produit].prix + ' €';
+        purchaseStorage[produit].price + ' €';
 
       //creation de la div cart__item__content__settings dans la div cart__item__content
       let divContentSettings = document.createElement('div');
@@ -111,7 +111,7 @@ fetch('http://localhost:3000/api/products')
       inputQuantity.setAttribute('name', 'inputQuantity');
       inputQuantity.setAttribute('min', 1);
       inputQuantity.setAttribute('max', 100);
-      inputQuantity.value = purchaseStorage[p].quantity; // A REVOIR
+      inputQuantity.value = purchaseStorage[produit].quantity; // A REVOIR
       
       //création de la div cart__item__content__settings__delete
       let itemDelete = document.createElement('div');
@@ -129,7 +129,7 @@ fetch('http://localhost:3000/api/products')
 //fonction pour quantité total et prix total des articles
 function totalItems() {
   //Calcul de la quantité
-  let eltQuantity = document.getElementsByClassName('itemQuantity');
+  let eltQuantity = document.getElementsByClassName('.itemQuantity');
   let totalQuantitySelect = 0;
 
   for (let i = 0; i < eltQuantity.length; i++) {
