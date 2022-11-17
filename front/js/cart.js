@@ -104,14 +104,14 @@ fetch('http://localhost:3000/api/products')
 
       //création de <input>
 
-      let inputQuantity = document.createElement('input');
-      divContentSettings.appendChild(inputQuantity);
-      inputQuantity.setAttribute('type', 'number');
-      inputQuantity.classList.add('inputQuantity');
-      inputQuantity.setAttribute('name', 'inputQuantity');
-      inputQuantity.setAttribute('min', 1);
-      inputQuantity.setAttribute('max', 100);
-      inputQuantity.value = purchaseStorage[produit].quantity; // A REVOIR
+      let itemQuantity = document.createElement('input');
+      divContentSettings.appendChild(itemQuantity);
+      itemQuantity.setAttribute('type', 'number');
+      itemQuantity.classList.add('itemQuantity');
+      itemQuantity.setAttribute('name', 'itemQuantity');
+      itemQuantity.setAttribute('min', 1);
+      itemQuantity.setAttribute('max', 100);
+      itemQuantity.setAttribute('value', 1); // explication sur input et sa value
       
       //création de la div cart__item__content__settings__delete
       let itemDelete = document.createElement('div');
@@ -129,9 +129,9 @@ fetch('http://localhost:3000/api/products')
 //fonction pour quantité total et prix total des articles
 function totalItems() {
   //Calcul de la quantité
-  let eltQuantity = document.getElementsByClassName('.itemQuantity');
+  let eltQuantity = document.querySelectorAll('.itemQuantity');
   let totalQuantitySelect = 0;
-
+console.log(eltQuantity);
   for (let i = 0; i < eltQuantity.length; i++) {
     totalQuantitySelect += eltQuantity[i].valueAsNumber;
   }
@@ -314,7 +314,7 @@ function orderForm() {
         .then((data) => {
           console.log(data);
           //envoie vers la page de de confirmation
-          window.location.href = 'confirmation.html' + '?orderId=' + orderId;
+          window.location.href = 'confirmation.html' + '?orderId=' + data.orderId;
           //vider le local storage la ???
         })
         .catch((error) => {

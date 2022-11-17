@@ -88,7 +88,7 @@ function onClick(article) {
 
       //init du localStorage
 
-      let purchaseStorage = JSON.parse(localStorage.getItem('product'));
+      let purchaseStorage = JSON.parse(localStorage.getItem('produit'));
 
       //alerte que l'utilisateur aura quand il ajoutera un article dans le panier
 
