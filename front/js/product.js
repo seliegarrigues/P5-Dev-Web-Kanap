@@ -62,6 +62,7 @@ function onClick(article) {
     let selectQuantity = quantitySelect.value;
     if (
         selectQuantity == 0 ||
+        selectQuantity < 0 ||
         selectQuantity > 100 ||
         selectColor == null ||
         selectColor == ''

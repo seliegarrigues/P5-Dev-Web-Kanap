@@ -111,7 +111,8 @@ fetch('http://localhost:3000/api/products')
       itemQuantity.setAttribute('name', 'itemQuantity');
       itemQuantity.setAttribute('min', 1);
       itemQuantity.setAttribute('max', 100);
-      itemQuantity.setAttribute('value', 1); // explication sur input et sa value
+      itemQuantity.setAttribute('value', purchaseStorage[produit].quantity); // explication sur input et sa value
+
       
       //création de la div cart__item__content__settings__delete
       let itemDelete = document.createElement('div');
@@ -159,7 +160,8 @@ console.log(event.target.value);
       purchaseStorage[i].quantity = event.target.value;
 
       if (
-        purchaseStorage[i].quantity == 0 ||
+        purchaseStorage[i].quantity == 0 || 
+        purchaseStorage[i].quantity < 0 ||
         purchaseStorage[i].quantity > 100
       ) {
         alert('Veuillez sélectionner une quantité comprise entre 1 et 100');
@@ -264,7 +266,7 @@ function orderForm() {
   orderButton.addEventListener('click', (e) => {
     e.preventDefault();
     //si local storage vide et /ou formulaire non remplis correctement après test ReGex
-    if (!purchaseStorage) {
+    if (!purchaseStorage || purchaseStorage.length === 0) {
       alert(
         'Votre panier est vide, veuillez sélectionner un article pour passer une commande'
       );
