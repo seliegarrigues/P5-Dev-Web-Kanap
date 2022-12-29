@@ -146,7 +146,7 @@ console.log(eltQuantity);
   }
   let productTotalPrice = document.getElementById('totalPrice');
   productTotalPrice.textContent = totalPrice;
-  console.log(totalPrice);
+  console.log(totalPrice + 'prixtotal');
 }
 //fonction de modification de la quantité des produits avec addEventListener change
 function modifyQuantity() {
@@ -155,7 +155,7 @@ function modifyQuantity() {
   for (let i = 0; i < modifQuantity.length; i++) {
     modifQuantity[i].addEventListener('change', function (event) {
       event.preventDefault();
-
+console.log(event.target.value);
       purchaseStorage[i].quantity = event.target.value;
 
       if (
